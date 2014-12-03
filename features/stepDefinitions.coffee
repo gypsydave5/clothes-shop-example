@@ -10,8 +10,14 @@ module.exports = ->
     callback()
 
   @Then /^I should see "([^"]*)"$/, (arg1, callback) ->
-    expect(element(By.css('h1'))).to.equal "Clothes Shop"
-    callback()
+    element(By.css('body')).getText().then (text)->
+      expect(text.indexOf(arg1) > -1).to.equal true
+      callback()
+
+  @Then /^I should see "([^"]*)" as a heading$/, (arg1, callback) ->
+    element(By.css('h1')).getText().then (text)->
+      expect(text).to.equal arg1
+      callback()
 
   @Then /^the category should be set to "([^"]*)"$/, (arg1, callback) ->
     callback.pending()
