@@ -7,6 +7,7 @@ module.exports = (grunt)->
         keepAlive: true
         noColor: false
         args:
+          baseUrl: 'http://localhost:1999/'
           cucumberOpts:
             format: 'summary'
 

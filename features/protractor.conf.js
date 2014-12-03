@@ -12,6 +12,8 @@ exports.config = {
   cucumberOpts: {
     require: 'stepDefinitions.coffee',
     format: 'pretty'
-  }
+  },
+
+  baseUrl: 'http://localhost:1999/'
 
 };
