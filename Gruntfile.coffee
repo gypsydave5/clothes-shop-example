@@ -1,10 +1,15 @@
 module.exports = (grunt)->
 
   grunt.initConfig
-    cucumberjs:
+    protractor:
       options:
-        format: 'pretty'
-      features: 'test/features'
+        configFile: 'test/features/protractor.conf.js'
+        keepAlive: true
+        noColor: false
+        args:
+          {}
+      default: {}
+
 
     karma:
       once:
@@ -14,8 +19,7 @@ module.exports = (grunt)->
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'test/**/*Spec.js',
-            'test/**/*.coffee',
+            'test/client/**/*Spec.coffee',
             'js/**/*.js'
           ]
           browsers: ['PhantomJS']
@@ -29,8 +33,8 @@ module.exports = (grunt)->
         singleRun: false
 
 
-  grunt.loadNpmTasks 'grunt-cucumberjs'
   grunt.loadNpmTasks 'grunt-karma'
+  grunt.loadNpmTasks 'grunt-protractor-runner'
 
   grunt.registerTask 'default', 'test'
-  grunt.registerTask 'test', ['cucumberjs', 'karma:once']
+  grunt.registerTask 'test', ['protractor', 'karma:once']
