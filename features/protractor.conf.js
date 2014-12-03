@@ -11,7 +11,7 @@ exports.config = {
 
   cucumberOpts: {
     require: 'stepDefinitions.coffee',
-    format: 'summary'
+    format: 'pretty'
   }
 
 };

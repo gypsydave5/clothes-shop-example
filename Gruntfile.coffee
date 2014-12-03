@@ -3,13 +3,20 @@ module.exports = (grunt)->
   grunt.initConfig
     protractor:
       options:
-        configFile: 'test/features/protractor.conf.js'
+        configFile: 'features/protractor.conf.js'
         keepAlive: true
         noColor: false
         args:
-          {}
+          cucumberOpts:
+            format: 'summary'
+
       default: {}
 
+      full:
+        options:
+          args:
+            cucumberOpts:
+              format: 'pretty'
 
     karma:
       once:
@@ -32,9 +39,9 @@ module.exports = (grunt)->
         autoWatch: true
         singleRun: false
 
-
   grunt.loadNpmTasks 'grunt-karma'
   grunt.loadNpmTasks 'grunt-protractor-runner'
 
   grunt.registerTask 'default', 'test'
-  grunt.registerTask 'test', ['protractor', 'karma:once']
+  grunt.registerTask 'test:cukes', 'protractor:full'
+  grunt.registerTask 'test', ['protractor:default', 'karma:once']
