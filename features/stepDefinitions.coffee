@@ -10,8 +10,8 @@ module.exports = ->
     callback()
 
   @Then /^I should see "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
+    expect(element(By.css('h1'))).to.equal "Clothes Shop"
+    callback()
 
   @Then /^the category should be set to "([^"]*)"$/, (arg1, callback) ->
     callback.pending()
