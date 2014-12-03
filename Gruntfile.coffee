@@ -7,8 +7,7 @@ module.exports = (grunt)->
       features: 'test/features'
 
     karma:
-        #configFile: './test/client/karma.conf.js'
-      unit:
+      once:
         options:
           files: [
             'bower_components/angular/angular.js',
@@ -16,16 +15,22 @@ module.exports = (grunt)->
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'test/**/*Spec.js',
+            'test/**/*.coffee',
             'js/**/*.js'
           ]
           browsers: ['PhantomJS']
           autoWatch: false
           frameworks: ['jasmine']
           singleRun: true
+          preprocessors:
+            '**/*.coffee': ['coffee']
+      watch:
+        autoWatch: true
+        singleRun: false
 
 
   grunt.loadNpmTasks 'grunt-cucumberjs'
   grunt.loadNpmTasks 'grunt-karma'
 
   grunt.registerTask 'default', 'test'
-  grunt.registerTask 'test', ['cucumberjs', 'karma']
+  grunt.registerTask 'test', ['cucumberjs', 'karma:once']
