@@ -20,8 +20,9 @@ module.exports = ->
       callback()
 
   @Then /^the category should be set to "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
+    element(By.css('#category')).getText().then (value)->
+      expect(value).to.match arg1
+      callback()
 
   @Then /^the order should be "([^"]*)"$/, (arg1, callback) ->
     callback.pending()

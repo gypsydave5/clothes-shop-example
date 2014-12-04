@@ -9,9 +9,9 @@ Feature: Viewing products
 
     Scenario: default products view
         Given I am on the homepage
-        Then the category should be set to "all"
+        Then I should see "Almond Toe Court Shoes"
+        And the category should be set to "all"
         And the order should be "Alphabetical"
-        And I should see "Almond Toe Court Shoes"
 
     Scenario: filtering by category
         Given I am on the homepage
