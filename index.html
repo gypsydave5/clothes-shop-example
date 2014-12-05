@@ -8,12 +8,22 @@
   <script src="bower_components/angular-resource/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/productsController.js"></script>
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css" type="text/css" media="all" />
 </head>
-<body>
+<body ng-controller="productsController">
   <header>
     <h1 id="">Clothes Shop</h1>
   </header>
+  <ul class="listgroup" ng-repeat="product in searchResults.products">
+  <li>
+  <h3>{{product.name}}</h3>
+  {{console.log(product)}}
+  <p>category: {{product.category}}</p>
+  <p>price: £{{product.price}}</p>
+  <p>{{product.stock}} in stock</p>
+  </li>
+  </ul>
   <footer>
 
   </footer>
