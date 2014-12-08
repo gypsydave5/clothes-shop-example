@@ -19,26 +19,15 @@ module.exports = ->
       expect(text).to.equal arg1
       callback()
 
-  @Then /^the category should be set to "([^"]*)"$/, (arg1, callback) ->
-    element(By.css('#category')).getText().then (value)->
-      expect(value).to.match arg1
+  @When /^I set the category to "([^"]*)"$/, (arg1, callback) ->
+    element(By.linkText("Category")).click().then ->
+      element(By.linkText("Men's Footwear")).click()
       callback()
 
-  @Then /^the order should be "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
-
-  @When /^I set the category to "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
-
   @Then /^I should not see "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
-
-  @Then /^I shoud see "([^"]*)"$/, (arg1, callback) ->
-    callback.pending()
-    return
+    element(By.css('body')).getText().then (text)->
+      expect(text.indexOf(arg1) > -1).to.equal false
+      callback()
 
   @Given /^the Red Flip Flops are out of stock$/, (callback) ->
     callback.pending()

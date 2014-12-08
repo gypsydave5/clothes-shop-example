@@ -7,20 +7,54 @@
   <script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="bower_components/angular-resource/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  <script src="bower_components/require/build/require.js" type="text/javascript" charset=""></script>
   <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/productsController.js"></script>
-  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css" type="text/css" media="all" />
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.css" type="text/css" media="all" />
+
 </head>
 <body ng-controller="productsController">
-  <div>
 
     <header>
-      <h1 id="">Clothes Shop</h1>
-      <nav class="span6">
-
+      <div class="container-fluid">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Clothes Shop</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="#" ng-click='productFilter = ""'>All</a>
+            </li>
+            <li>
+              <a href="#" ng-click='productFilter = "Womens Footwear"'>Women's Footwear</a>
+            </li>
+            <li>
+              <a id="mensfootwear" href="#" ng-click='productFilter = "Mens Footwear"'>Men's Footwear</a>
+            </li>
+            <li>
+              <a href="#" ng-click='productFilter = "Womens Casualwear"'>Women's Casualwear</a>
+            </li>
+            <li>
+              <a href="#" ng-click='productFilter = "Mens Casualwear"'>Men's Casualwear</a>
+            </li>
+            <li>
+              <a href="#" ng-click='productFilter = "Womens Casualwear"'>Women's Formalwear</a>
+            </li>
+            <li>
+              <a href="#" ng-click='productFilter = "Mens Casualwear"'>Men's Formalwear</a>
+            </li>
+          </ul>
+          </li>
+        </div>
       </nav>
+      </div>
     </header>
-    <ul class="listgroup" ng-repeat="product in searchResults.products">
+    <ul class="listgroup" ng-repeat="product in searchResults.products | filter : {'category':productFilter} : (productFilter == '' ? false : true) ">
       <li>
       <h3>{{product.name}}</h3>
       {{console.log(product)}}
@@ -32,6 +66,5 @@
     <footer>
 
     </footer>
-  </div>
 </body>
 </html>
