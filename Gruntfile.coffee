@@ -45,4 +45,5 @@ module.exports = (grunt)->
 
   grunt.registerTask 'default', 'test'
   grunt.registerTask 'test:cukes', 'protractor:full'
+  grunt.registerTask 'test:unit', 'karma:once'
   grunt.registerTask 'test', ['protractor:default', 'karma:once']
