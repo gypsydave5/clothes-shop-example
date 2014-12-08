@@ -12,20 +12,26 @@
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css" type="text/css" media="all" />
 </head>
 <body ng-controller="productsController">
-  <header>
-    <h1 id="">Clothes Shop</h1>
-  </header>
-  <ul class="listgroup" ng-repeat="product in searchResults.products">
-  <li>
-  <h3>{{product.name}}</h3>
-  {{console.log(product)}}
-  <p>category: {{product.category}}</p>
-  <p>price: £{{product.price}}</p>
-  <p>{{product.stock}} in stock</p>
-  </li>
-  </ul>
-  <footer>
+  <div>
 
-  </footer>
+    <header>
+      <h1 id="">Clothes Shop</h1>
+      <nav class="span6">
+
+      </nav>
+    </header>
+    <ul class="listgroup" ng-repeat="product in searchResults.products">
+      <li>
+      <h3>{{product.name}}</h3>
+      {{console.log(product)}}
+      <p>category: {{product.category}}</p>
+      <p>price: £{{product.price}}</p>
+      <p>{{product.stock}} in stock</p>
+      </li>
+    </ul>
+    <footer>
+
+    </footer>
+  </div>
 </body>
 </html>

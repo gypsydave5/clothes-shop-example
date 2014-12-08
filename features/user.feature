@@ -10,8 +10,6 @@ Feature: Viewing products
     Scenario: default products view
         Given I am on the homepage
         Then I should see "Almond Toe Court Shoes"
-        And the category should be set to "all"
-        And the order should be "Alphabetical"
 
     Scenario: filtering by category
         Given I am on the homepage
@@ -24,3 +22,4 @@ Feature: Viewing products
         And the Red Flip Flops are out of stock
         When I set the category to "Men's Footwear"
         Then I should see "Out of Stock"
+        And I should not be able to add them to the shopping cart
