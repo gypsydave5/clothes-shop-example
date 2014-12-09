@@ -6,7 +6,7 @@ expect = chai.expect
 module.exports = ->
 
   @Given /^I am on the homepage$/, (callback) ->
-    browser.get 'index.html'
+    browser.get '/'
     callback()
 
   @Then /^I should see "([^"]*)"$/, (arg1, callback) ->
@@ -21,7 +21,7 @@ module.exports = ->
 
   @When /^I set the category to "([^"]*)"$/, (arg1, callback) ->
     element(By.linkText("Category")).click().then ->
-      element(By.linkText("Men's Footwear")).click()
+      element(By.linkText(arg1)).click()
       callback()
 
   @Then /^I should not see "([^"]*)"$/, (arg1, callback) ->
@@ -31,4 +31,7 @@ module.exports = ->
 
   @Given /^the Red Flip Flops are out of stock$/, (callback) ->
     callback.pending()
-    return
+
+  @When /^I click on the shopping cart$/, (callback) ->
+    element(By.linkText("Shopping Cart")).click()
+    callback()
