@@ -1,0 +1,10 @@
+<ul class="listgroup" ng-repeat="product in searchResults.products | filter : {'category':productFilter} : (productFilter == '' ? false : true) ">
+  <li>
+  <h3>{{product.name}}</h3>
+  {{console.log(product)}}
+  <p>category: {{product.category}}</p>
+  <p>price: £{{product.price}}</p>
+  <p>{{product.stock}} in stock</p>
+  </li>
+</ul>
+
