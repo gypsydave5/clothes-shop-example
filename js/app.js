@@ -1,8 +1,11 @@
 var clothesShop = angular.module('clothesShop', [
   'ngRoute',
   'ngResource',
-  'shopControllers'
+  'shopControllers',
+  'shopServices'
   ]);
+
+angular.module('shopServices', []);
 
 clothesShop.config(['$routeProvider',
   function($routeProvider) {
