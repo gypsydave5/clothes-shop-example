@@ -17,6 +17,13 @@ shopControllers.service('shoppingCart', function() {
     remove: function(product) {
       index = cart.indexOf(product);
       cart.splice(index, 1);
+    },
+    totalValue: function() {
+      var total = 0;
+      cart.forEach(function(item) {
+        total += item.price;
+      }
+      return total;
     }
   }
 });
@@ -40,6 +47,10 @@ shopControllers.controller('productsController', [
 
     $scope.cart.remove = function(item) {
       shoppingCart.remove(item);
+    }
+
+    $scope.cart.totalValue = function() {
+      shoppingCart.totalValue());
     }
 }]);
 
