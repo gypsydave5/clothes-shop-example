@@ -3,7 +3,7 @@ describe 'productsController', ->
   scope = null
   controller = null
 
-  beforeEach module('ClothesShop')
+  beforeEach module('clothesShop')
 
   beforeEach inject ($rootScope, $controller)->
     scope = $rootScope.$new()
