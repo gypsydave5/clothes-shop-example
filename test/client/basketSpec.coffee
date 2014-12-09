@@ -36,5 +36,5 @@ describe 'shoppingCart', ->
     item4 = { id: 2, name: "joe", price: 20.00 }
     scope.cart.add(item1)
     scope.cart.add(item4)
-    expect(scope.cart.total).toEqual 30
+    expect(scope.cart.totalValue()).toEqual 30
 

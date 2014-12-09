@@ -22,7 +22,7 @@ shopControllers.service('shoppingCart', function() {
       var total = 0;
       cart.forEach(function(item) {
         total += item.price;
-      }
+      });
       return total;
     }
   }
@@ -49,8 +49,7 @@ shopControllers.controller('productsController', [
       shoppingCart.remove(item);
     }
 
-    $scope.cart.totalValue = function() {
-      shoppingCart.totalValue());
-    }
+    $scope.cart.totalValue = shoppingCart.totalValue
+
 }]);
 
