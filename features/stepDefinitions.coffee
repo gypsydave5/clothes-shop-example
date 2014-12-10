@@ -96,5 +96,5 @@ module.exports = ->
 
   @When /^I enter the voucher code "([^"]*)"$/, (voucherCode, callback)->
     element(By.css('#voucher-code')).sendKeys(voucherCode)
-    callback.pending()
+    callback()
 

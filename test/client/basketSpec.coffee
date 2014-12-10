@@ -38,3 +38,15 @@ describe 'shoppingCart', ->
     scope.cart.add(item4)
     expect(scope.cart.totalValue()).toEqual 30
 
+  it 'can have a discount', ->
+    item1 = { id: 1, name: "bob", price: 10.00 }
+    item4 = { id: 2, name: "joe", price: 20.00 }
+    scope.cart.add(item1)
+    scope.cart.add(item4)
+    scope.cart.discount = 10
+    expect(scope.cart.discount).toEqual 10
+    expect(scope.cart.preDiscountTotal()).toEqual 30
+    expect(scope.cart.totalValue()).toEqual 20
+
+
+

@@ -12,12 +12,12 @@ shopControllers.controller('productsController', [
   'vouchers',
   function($scope, $http, sharedProperties, shoppingCart, vouchers){
 
-    var voucher;
+    $scope.voucher;
 
-    var applyVoucher = function(thisVoucher) {
+    $scope.applyVoucher = function(thisVoucher) {
       $scope.vouchers.add(thisVoucher);
-      $scope.vouchers.applyDiscounts(cart);
-      thisVoucher = null;
+      $scope.vouchers.applyDiscount($scope.cart);
+      $scope.voucher = "";
     }
 
     $http.get('mock_db/allProducts.json').success(function(data){
