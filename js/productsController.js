@@ -28,5 +28,13 @@ shopControllers.controller('productsController', [
       vouchers.add(voucher);
     }
 
+    $scope.vouchers.areValid = function(cart) {
+      return vouchers.areValid(cart);
+    }
+
+    $scope.vouchers.removeInvalid= function(cart) {
+      return vouchers.removeInvalid(cart);
+    }
+
 }]);
 

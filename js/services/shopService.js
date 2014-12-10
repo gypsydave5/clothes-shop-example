@@ -22,6 +22,7 @@ angular.module('shopServices').service('shoppingCart', [function() {
       });
       return total;
     };
+    return this
   }
 
   var cart = new Cart();
@@ -39,7 +40,9 @@ angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
   }
 
   var notEmpty;
-  var greaterThanFifty;
+  var greaterThanFifty = function (cart) {
+    return cart.totalValue() >= 50;
+  }
   var greaterThanSeventyFiveAndFootwear;
 
   var save5 = new Voucher('save5', 5, notEmpty);
@@ -54,16 +57,30 @@ angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
       return vouchers;
     },
     discount: function(cart) {
-      totalDiscount = 0;
-      currentVouchers.forEach(function(currentVoucher) {
+      var totalDiscount = 0;
+      vouchers.forEach(function(currentVoucher) {
         totalDiscount += currentVoucher.discount;
-        }
       });
+      return totalDiscount;
     },
     add: function(voucher) {
       currentVouchers.forEach(function(currentVoucher) {
         if (currentVoucher.name == voucher) {
-          vouchers.push(voucher);
+          vouchers.push(currentVoucher);
+        }
+      });
+    },
+    areValid: function(cart) {
+      return vouchers.every( function (voucher) {
+        return voucher.validate(cart);
+      });
+    },
+    removeInvalid: function(cart) {
+      vouchers.forEach(function(voucher) {
+        if (!voucher.validate(cart)) {
+          var index;
+          index = vouchers.indexOf(voucher);
+          vouchers.splice(index, 1);
         }
       });
     }

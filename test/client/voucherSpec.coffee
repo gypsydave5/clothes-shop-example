@@ -37,7 +37,7 @@ describe 'shoppingCart', ->
 
   it 'adds valid vouchers', ->
     scope.vouchers.add('save10')
-    expect(scope.vouchers).toEqual ['save10']
+    expect(scope.vouchers[0].name).toEqual 'save10'
 
   it 'does not add invalid vouchers', ->
     scope.vouchers.add('fhqwhgads')
@@ -47,4 +47,22 @@ describe 'shoppingCart', ->
     scope.vouchers.add('save10')
     scope.vouchers.add('save5')
     expect(scope.vouchers.getDiscount(cart1)).toEqual 15
+
+  it 'can validate the discounts', ->
+    scope.vouchers.add('save10')
+    scope.cart.add(item1)
+    expect(scope.vouchers.areValid(scope.cart)).toEqual true
+
+  it 'can invalidate a discount', ->
+    scope.vouchers.add('save10')
+    scope.cart.add(item2)
+    expect(scope.vouchers.areValid(scope.cart)).toEqual false
+
+  it 'can remove invalid discounts', ->
+    scope.vouchers.add('save10')
+    scope.cart.add(item2)
+    scope.vouchers.removeInvalid(scope.cart)
+    expect(scope.vouchers).toEqual []
+
+
 
