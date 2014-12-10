@@ -9,7 +9,8 @@ shopControllers.controller('productsController', [
   '$http',
   'sharedProperties',
   'shoppingCart',
-  function($scope, $http, sharedProperties, shoppingCart){
+  'vouchers',
+  function($scope, $http, sharedProperties, shoppingCart, vouchers){
 
     $http.get('mock_db/allProducts.json').success(function(data){
       $scope.searchResults = data;
@@ -25,7 +26,17 @@ shopControllers.controller('productsController', [
       shoppingCart.remove(item);
     }
 
-    $scope.cart.totalValue = shoppingCart.totalValue
+    $scope.cart.totalValue = shoppingCart.totalValue;
+
+    $scope.vouchers = vouchers.get();
+
+    $scope.vouchers.getDiscount = function(cart) {
+      return vouchers.discount(cart);
+    }
+
+    $scope.vouchers.add = function(voucher) {
+      vouchers.add(voucher);
+    }
 
 }]);
 

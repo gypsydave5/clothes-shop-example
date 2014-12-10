@@ -10,7 +10,7 @@ describe 'shoppingCart', ->
     controller = $controller 'productsController',
       {$scope: scope}
 
-  it 'starts witha an empty shopping cart', ->
+  it 'starts with an empty shopping cart', ->
     expect(scope.cart).toEqual []
 
   it 'can have items added to it', ->

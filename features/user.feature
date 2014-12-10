@@ -19,7 +19,7 @@ Feature: Viewing products
 
     Scenario: out of stock
         Given I am on the homepage
-        And the Red Flip Flops are out of stock
+        And the Blue Flip Flops are out of stock
         When I set the category to "Men's Footwear"
         Then I should see "Out of Stock"
         And I should not be able to add them to the shopping cart

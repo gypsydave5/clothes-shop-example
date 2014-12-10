@@ -1,4 +1,4 @@
-describe 'productsController', ->
+describe 'shoppingCart', ->
 
   scope = null
   controller = null
@@ -10,8 +10,5 @@ describe 'productsController', ->
     controller = $controller 'productsController',
       {$scope: scope}
 
-
-  it 'initializes with no products and no category', ->
-    expect(scope.products).toBeUndefined
-    expect(scope.category).toBeUndefined
-
+  it 'starts witha an empty shopping cart', ->
+    expect(scope.cart).toEqual []

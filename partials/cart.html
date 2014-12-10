@@ -1,1 +1,18 @@
-<p>You have no products in your shopping cart</p>
+<p ng-show="cart.length === 0">You have no products in your shopping cart</p>
+<ul class="listgroup" ng-repeat="product in cart track by $index">
+  <li>
+  <h3>{{product.name}}</h3>
+  {{console.log(product)}}
+  <p>category: {{product.category}}</p>
+  <p>price: {{product.price | currency : "£"}}</p>
+  <p>{{product.stock}} in stock</p>
+  <a class="btn btn-default" ng-click="cart.remove(product)">remove</a>
+  </li>
+</ul>
+
+<h3>Total: {{cart.totalValue() | currency : "£"}}</h3>
+
+<form ng-submit="applyVoucher(voucher)">
+  <input type="text" name="voucher-code" id="voucher-code" value="" />
+  <p><input type="submit" value="Submit"></p>
+</form>

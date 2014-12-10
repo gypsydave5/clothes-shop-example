@@ -1,10 +1,12 @@
 <ul class="listgroup" ng-repeat="product in searchResults.products | filter : {'category':productFilter} : (productFilter == '' ? false : true) ">
-  <li>
+  <li id="product_id_{{product.id}}">
   <h3>{{product.name}}</h3>
-  {{console.log(product)}}
   <p>category: {{product.category}}</p>
-  <p>price: £{{product.price}}</p>
-  <p>{{product.stock}} in stock</p>
+  <p>price: {{product.price | currency : "£"}}</p>
+  <p ng-hide="product.stock === 0">{{product.stock}} in stock</p>
+  <p ng-show="product.stock === 0">Out of Stock</p>
+  <a class="btn btn-default" ng-click="cart.add(product)" ng-hide="product.stock === 0">add to basket</a>
+  <a class="btn btn-disabled" ng-show="product.stock === 0">add to basket</a>
   </li>
 </ul>
 
