@@ -20,8 +20,8 @@ shopControllers.controller('productsController', [
 
     $scope.vouchers = vouchers.get();
 
-    $scope.vouchers.getDiscount = function(cart) {
-      return vouchers.discount(cart);
+    $scope.vouchers.getDiscount = function() {
+      return vouchers.discount();
     }
 
     $scope.vouchers.add = function(voucher) {
@@ -32,9 +32,12 @@ shopControllers.controller('productsController', [
       return vouchers.areValid(cart);
     }
 
-    $scope.vouchers.removeInvalid= function(cart) {
+    $scope.vouchers.removeInvalid = function(cart) {
       return vouchers.removeInvalid(cart);
     }
 
+    $scope.vouchers.applyDiscount = function(cart) {
+      return vouchers.applyDiscount(cart);
+    }
 }]);
 

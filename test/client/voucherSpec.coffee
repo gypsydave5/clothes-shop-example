@@ -16,6 +16,14 @@ describe 'shoppingCart', ->
     "stock": 4
   }
 
+  item3 = {
+    "id": 13,
+    "name": "Mid Twist Cut-Out Dress, Pink",
+    "category": "Womens Formalwear",
+    "price": 540.00,
+    "stock": 5
+  }
+
   cart1 = []
   cart2 = [item2]
 
@@ -53,7 +61,7 @@ describe 'shoppingCart', ->
     scope.cart.add(item1)
     expect(scope.vouchers.areValid(scope.cart)).toEqual true
 
-  it 'can invalidate a discount', ->
+  it 'can invalidate a discount based on price', ->
     scope.vouchers.add('save10')
     scope.cart.add(item2)
     expect(scope.vouchers.areValid(scope.cart)).toEqual false
@@ -64,5 +72,25 @@ describe 'shoppingCart', ->
     scope.vouchers.removeInvalid(scope.cart)
     expect(scope.vouchers).toEqual []
 
+  it 'can validate based on category', ->
+    scope.vouchers.add('save15')
+    scope.cart.add(item1)
+    expect(scope.vouchers.areValid(scope.cart)).toEqual true
 
+  it 'can invalidate based on category', ->
+    scope.vouchers.add('save15')
+    scope.cart.add(item3)
+    expect(scope.vouchers.areValid(scope.cart)).toEqual false
 
+  it 'will invalidate an empty cart', ->
+    scope.vouchers.add('save5')
+    expect(scope.vouchers.areValid(scope.cart)).toEqual false
+
+  it 'will always validate with no vouchers', ->
+    expect(scope.vouchers.areValid(scope.cart)).toEqual true
+
+  it 'can validate and add a discount to the cart', ->
+    scope.vouchers.add('save15')
+    scope.cart.add(item1)
+    scope.vouchers.applyDiscount(scope.cart)
+    expect(scope.cart.discount).toEqual 15
