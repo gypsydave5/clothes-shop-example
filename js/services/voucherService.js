@@ -8,63 +8,71 @@ angular.module('shopServices').service('voucherService', ['shoppingCart', functi
     this.validate = validation;
   }
 
-  var notEmpty = function (cart) {
-    return cart.items.length > 0;
-  }
-  var greaterThanFifty = function (cart) {
-    return cart.totalValue() >= 50;
-  }
-  var greaterThanSeventyFiveAndFootwear = function (cart) {
-    var hasFootwear = cart.items.some( function (item) {
+  var notEmpty = function (cart) { return cart.items.length > 0; }
+
+  var greaterThanFifty = function (cart) { return cart.totalValue() >= 50; }
+
+  var hasFootwear = function(cart) {
+    return cart.items.some( function (item) {
       return (item.category.indexOf("Footwear") > -1)
     });
-    return hasFootwear && cart.totalValue() >= 75
+  }
+
+  var greaterThanSeventyFiveAndFootwear = function (cart) {
+    return hasFootwear(cart) && cart.totalValue() >= 75
   }
 
   var save5 = new Voucher('save5', 5, notEmpty);
   var save10 = new Voucher('save10', 10, greaterThanFifty);
   var save15 = new Voucher('save15', 15, greaterThanSeventyFiveAndFootwear);
 
-  var _vouchers = [];
   var currentVouchers = [save5, save10, save15]
 
-  return {
-    get: function() {
-      return _vouchers;
-    },
-    discount: function() {
+  function VoucherContainer() {
+    this.vouchers = [];
+    this.get = function() { return this.vouchers };
+
+    this.discount = function () {
       var totalDiscount = 0;
-      _vouchers.forEach(function(currentVoucher) {
+      this.vouchers.forEach(function (currentVoucher) {
         totalDiscount += currentVoucher.discount;
       });
       return totalDiscount;
-    },
-    add: function(voucher) {
-      currentVouchers.forEach(function(currentVoucher) {
+    };
+
+    this.add = function (voucher) {
+      var that = this;
+      currentVouchers.forEach(function (currentVoucher) {
         if (currentVoucher.name === voucher) {
-          _vouchers.push(currentVoucher);
+          that.vouchers.push(currentVoucher);
         }
       });
-    },
-    areValid: function(cart) {
-      return _vouchers.every( function (voucher) {
+    };
+
+    this.areValid = function (cart) {
+      return this.vouchers.every(function (voucher) {
         return voucher.validate(cart);
       });
-    },
-    removeInvalid: function(cart) {
-      _vouchers.forEach(function(voucher) {
+    };
+
+    this.removeInvalid = function (cart) {
+      var that = this;
+      this.vouchers.forEach(function (voucher) {
         if (!voucher.validate(cart)) {
           var index;
-          index = _vouchers.indexOf(voucher);
-          _vouchers.splice(index, 1);
+          index = that.vouchers.indexOf(voucher);
+          that.vouchers.splice(index, 1);
         }
       });
-    },
-    applyDiscount: function (cart) {
+    };
+
+    this.applyDiscount = function (cart) {
       this.removeInvalid(cart);
       cart.discount = this.discount();
     }
   }
 
-}]);
+  var voucherContainer = new VoucherContainer;
+  return voucherContainer;
 
+}]);
