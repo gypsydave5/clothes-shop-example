@@ -16,17 +16,7 @@ shopControllers.controller('productsController', [
       $scope.searchResults = data;
     });
 
-    $scope.cart = shoppingCart.get();
-
-    $scope.cart.add = function(item) {
-      shoppingCart.add(item);
-    }
-
-    $scope.cart.remove = function(item) {
-      shoppingCart.remove(item);
-    }
-
-    $scope.cart.totalValue = shoppingCart.totalValue;
+    $scope.cart = shoppingCart
 
     $scope.vouchers = vouchers.get();
 

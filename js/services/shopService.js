@@ -1,33 +1,36 @@
 "use strict";
 
-angular.module('shopServices').service('shoppingCart', [ function() {
+angular.module('shopServices').service('shoppingCart', [function() {
 
-  var cart = [];
-
-  return {
-    get: function() {
-      return cart;
-    },
-    add: function(new_product) {
-      cart.push(new_product);
-    },
-    remove: function(product) {
+  function Cart() {
+    this.items = [];
+    this.get = function() {
+      return this.items
+    }
+    this.add = function(item) {
+      this.items.push(item);
+    };
+    this.remove = function(item) {
       var index;
-      index = cart.indexOf(product);
-      cart.splice(index, 1);
-    },
-    totalValue: function() {
+      index = this.items.indexOf(item);
+      this.items.splice(index, 1);
+    };
+    this.totalValue = function() {
       var total = 0;
-      cart.forEach(function(item) {
+      this.items.forEach(function(item) {
         total += item.price;
       });
       return total;
-    }
+    };
   }
+
+  var cart = new Cart();
+
+  return cart;
 
 }]);
 
-angular.module('shopServices').service('vouchers', [function() {
+angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
 
   function Voucher(name, discount, validation) {
     this.name = name;
