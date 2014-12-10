@@ -38,23 +38,23 @@ describe 'shoppingCart', ->
       {$scope: scope}
 
   it 'starts with no vouchers applied', ->
-    expect(scope.vouchers).toEqual []
+    expect(scope.vouchers.get()).toEqual []
 
   it 'starts with no discount', ->
-    expect(scope.vouchers.getDiscount(cart1)).toEqual 0
+    expect(scope.vouchers.discount(cart1)).toEqual 0
 
   it 'adds valid vouchers', ->
     scope.vouchers.add('save10')
-    expect(scope.vouchers[0].name).toEqual 'save10'
+    expect(scope.vouchers.get()[0].name).toEqual 'save10'
 
   it 'does not add invalid vouchers', ->
     scope.vouchers.add('fhqwhgads')
-    expect(scope.vouchers).toEqual []
+    expect(scope.vouchers.get()).toEqual []
 
   it 'gets the correct discount for the vouchers', ->
     scope.vouchers.add('save10')
     scope.vouchers.add('save5')
-    expect(scope.vouchers.getDiscount(cart1)).toEqual 15
+    expect(scope.vouchers.discount(cart1)).toEqual 15
 
   it 'can validate the discounts', ->
     scope.vouchers.add('save10')
@@ -70,7 +70,7 @@ describe 'shoppingCart', ->
     scope.vouchers.add('save10')
     scope.cart.add(item2)
     scope.vouchers.removeInvalid(scope.cart)
-    expect(scope.vouchers).toEqual []
+    expect(scope.vouchers.get()).toEqual []
 
   it 'can validate based on category', ->
     scope.vouchers.add('save15')

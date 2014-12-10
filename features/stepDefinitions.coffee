@@ -5,8 +5,6 @@ expect = chai.expect
 
 module.exports = ->
 
-
-
   @Given /^I am on the homepage$/, (callback) ->
     browser.get '/'
     callback()

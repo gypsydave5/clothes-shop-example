@@ -18,27 +18,7 @@ shopControllers.controller('productsController', [
 
     $scope.cart = shoppingCart
 
-    $scope.vouchers = voucherService.get();
-
-    $scope.vouchers.getDiscount = function() {
-      return voucherService.discount();
-    }
-
-    $scope.vouchers.add = function(voucher) {
-      voucherService.add(voucher);
-    }
-
-    $scope.vouchers.areValid = function(cart) {
-      return voucherService.areValid(cart);
-    }
-
-    $scope.vouchers.removeInvalid = function(cart) {
-      return voucherService.removeInvalid(cart);
-    }
-
-    $scope.vouchers.applyDiscount = function(cart) {
-      return voucherService.applyDiscount(cart);
-    }
+    $scope.vouchers = voucherService
 
     $scope.voucher;
 
