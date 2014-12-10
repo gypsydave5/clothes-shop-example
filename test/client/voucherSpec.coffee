@@ -46,6 +46,5 @@ describe 'shoppingCart', ->
   it 'gets the correct discount for the vouchers', ->
     scope.vouchers.add('save10')
     scope.vouchers.add('save5')
-    expect(scope.vouchers.getDiscount(cart1)).toEqual 0
-
+    expect(scope.vouchers.getDiscount(cart1)).toEqual 15
 
