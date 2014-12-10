@@ -40,22 +40,11 @@ Run the feature tests with `grunt test:cukes`
 
 ###To do
 
-I spent **way** too much time learning how AngularJS works (relatively simple) and
-setting up my beloved Cucumber tests with Protractor and Grunt (much more
-involved), so much so that I haven't finished yet. I should've just thrown it together
-in Rails in ten minutes. Anyway, the direction of travel is well documented in
-the Cucumber tests found in the `features` directory.
+Add some new Cukes for:
 
-My intention would be to initially show the different categories of product
-using an Angular filter to display only the matching items. Adding products to
-and from the basket would be a case of updating a local JavaScript object with
-the products on, while updating stock levels at the database, and then
-sending the entire object across to the server (along with customer details) on
-order submission.
-
-Out of stock items would have their "add to basket" button greyed out, and offer
-prices would be displayed using an 'offer' field in the product object with the
-new price in.
-
-Vouchers would be validated with a call to the server (sending the basket and
-the code over).
+- implement offer prices
+- add notification that the voucher code has failed
+- update stock availability based on the basket
+- make voucher codes unique
+- refactor...
+- ... a lot :smile:
