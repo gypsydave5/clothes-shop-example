@@ -9,16 +9,8 @@ shopControllers.controller('productsController', [
   '$http',
   'sharedProperties',
   'shoppingCart',
-  'vouchers',
-  function($scope, $http, sharedProperties, shoppingCart, vouchers){
-
-    $scope.voucher;
-
-    $scope.applyVoucher = function(thisVoucher) {
-      $scope.vouchers.add(thisVoucher);
-      $scope.vouchers.applyDiscount($scope.cart);
-      $scope.voucher = "";
-    }
+  'voucherService',
+  function($scope, $http, sharedProperties, shoppingCart, voucherService){
 
     $http.get('mock_db/allProducts.json').success(function(data){
       $scope.searchResults = data;
@@ -26,26 +18,34 @@ shopControllers.controller('productsController', [
 
     $scope.cart = shoppingCart
 
-    $scope.vouchers = vouchers.get();
+    $scope.vouchers = voucherService.get();
 
     $scope.vouchers.getDiscount = function() {
-      return vouchers.discount();
+      return voucherService.discount();
     }
 
     $scope.vouchers.add = function(voucher) {
-      vouchers.add(voucher);
+      voucherService.add(voucher);
     }
 
     $scope.vouchers.areValid = function(cart) {
-      return vouchers.areValid(cart);
+      return voucherService.areValid(cart);
     }
 
     $scope.vouchers.removeInvalid = function(cart) {
-      return vouchers.removeInvalid(cart);
+      return voucherService.removeInvalid(cart);
     }
 
     $scope.vouchers.applyDiscount = function(cart) {
-      return vouchers.applyDiscount(cart);
+      return voucherService.applyDiscount(cart);
+    }
+
+    $scope.voucher;
+
+    $scope.applyVoucher = function(voucher) {
+      $scope.vouchers.add(voucher);
+      $scope.vouchers.applyDiscount($scope.cart);
+      $scope.voucher = "";
     }
 }]);
 

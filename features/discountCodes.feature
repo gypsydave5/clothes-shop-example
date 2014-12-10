@@ -35,3 +35,4 @@ Feature: voucher codes
         But none of those items is an item of footwear
         When I enter the voucher code "save15"
         Then I should see "Invalid voucher"
+

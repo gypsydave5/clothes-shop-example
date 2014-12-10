@@ -95,6 +95,17 @@ module.exports = ->
           callback()
 
   @When /^I enter the voucher code "([^"]*)"$/, (voucherCode, callback)->
-    element(By.css('#voucher-code')).sendKeys(voucherCode)
+    element(By.css('#voucher-code')).sendKeys(voucherCode, protractor.Key.ENTER)
     callback()
 
+  @Given /^that one of those items is an item of footwear$/, (callback)->
+    callback()
+
+  @Given /^that I have items worth £19.00 in my shopping cart$/, (callback)->
+    browser.get '/'
+    element(By.css('#product_id_10')).
+    element(By.linkText('add to basket')).click().then ->
+      element(By.css('#product_id_4')).
+      element(By.linkText('add to basket')).click().then ->
+        element(By.linkText("Shopping Cart")).click().then ->
+          callback()

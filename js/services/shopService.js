@@ -37,7 +37,7 @@ angular.module('shopServices').service('shoppingCart', [function() {
 
 }]);
 
-angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
+angular.module('shopServices').service('voucherService', ['shoppingCart', function() {
 
   function Voucher(name, discount, validation) {
     this.name = name;
@@ -46,7 +46,7 @@ angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
   }
 
   var notEmpty = function (cart) {
-    cart.length > 0;
+    return cart.items.length > 0;
   }
   var greaterThanFifty = function (cart) {
     return cart.totalValue() >= 50;
@@ -62,38 +62,38 @@ angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
   var save10 = new Voucher('save10', 10, greaterThanFifty);
   var save15 = new Voucher('save15', 15, greaterThanSeventyFiveAndFootwear);
 
-  var vouchers = [];
+  var _vouchers = [];
   var currentVouchers = [save5, save10, save15]
 
   return {
     get: function() {
-      return vouchers;
+      return _vouchers;
     },
     discount: function() {
       var totalDiscount = 0;
-      vouchers.forEach(function(currentVoucher) {
+      _vouchers.forEach(function(currentVoucher) {
         totalDiscount += currentVoucher.discount;
       });
       return totalDiscount;
     },
     add: function(voucher) {
       currentVouchers.forEach(function(currentVoucher) {
-        if (currentVoucher.name == voucher) {
-          vouchers.push(currentVoucher);
+        if (currentVoucher.name === voucher) {
+          _vouchers.push(currentVoucher);
         }
       });
     },
     areValid: function(cart) {
-      return vouchers.every( function (voucher) {
+      return _vouchers.every( function (voucher) {
         return voucher.validate(cart);
       });
     },
     removeInvalid: function(cart) {
-      vouchers.forEach(function(voucher) {
+      _vouchers.forEach(function(voucher) {
         if (!voucher.validate(cart)) {
           var index;
-          index = vouchers.indexOf(voucher);
-          vouchers.splice(index, 1);
+          index = _vouchers.indexOf(voucher);
+          _vouchers.splice(index, 1);
         }
       });
     },
