@@ -94,3 +94,9 @@ describe 'shoppingCart', ->
     scope.cart.add(item1)
     scope.vouchers.applyDiscount(scope.cart)
     expect(scope.cart.discount).toEqual 15
+
+  it 'will not accept duplicate vouchers', ->
+    scope.vouchers.add('save5')
+    scope.vouchers.add('save5')
+    expect(scope.vouchers.get().length).toEqual 1
+

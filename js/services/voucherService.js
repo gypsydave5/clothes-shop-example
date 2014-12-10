@@ -26,7 +26,7 @@ angular.module('shopServices').service('voucherService', ['shoppingCart', functi
   var save10 = new Voucher('save10', 10, greaterThanFifty);
   var save15 = new Voucher('save15', 15, greaterThanSeventyFiveAndFootwear);
 
-  var currentVouchers = [save5, save10, save15]
+  var currentVouchers = { save5: save5, save10: save10, save15: save15 }
 
   function VoucherContainer() {
     this.vouchers = [];
@@ -40,13 +40,16 @@ angular.module('shopServices').service('voucherService', ['shoppingCart', functi
       return totalDiscount;
     };
 
-    this.add = function (voucher) {
-      var that = this;
-      currentVouchers.forEach(function (currentVoucher) {
-        if (currentVoucher.name === voucher) {
-          that.vouchers.push(currentVoucher);
-        }
+    this.noDuplicateVoucher = function(voucherName) {
+      return this.vouchers.every( function(voucher) {
+        return voucher.name != voucherName
       });
+    };
+
+    this.add = function (newVoucherName) {
+      if (currentVouchers[newVoucherName] && this.noDuplicateVoucher(newVoucherName)) {
+        this.vouchers.push(currentVouchers[newVoucherName]);
+      };
     };
 
     this.areValid = function (cart) {
