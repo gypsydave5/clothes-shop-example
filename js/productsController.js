@@ -42,10 +42,20 @@ shopControllers.controller('productsController', [
 
     $scope.voucher;
 
+    $scope.error = { show: false, message: ""}
+
     $scope.applyVoucher = function(voucher) {
       $scope.vouchers.add(voucher);
-      $scope.vouchers.applyDiscount($scope.cart);
       $scope.voucher = "";
+      if ($scope.vouchers.areValid) {
+        $scope.vouchers.applyDiscount($scope.cart);
+        $scope.error.message = "";
+        $scope.error.show = false;
+      } else {
+        $scope.error.show = true;
+        $scope.error.message = "Invalid voucher";
+      }
     }
+
 }]);
 

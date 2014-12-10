@@ -11,7 +11,6 @@
 
 <h3>Total: {{cart.totalValue() | currency : "£"}}</h3>
 <h4>Discount: {{cart.discount}}</h4>
-<h4>{{vouchers}}</h4>
 
 <form ng-submit="applyVoucher(voucher)">
   <input type="text" name="voucher-code" id="voucher-code" ng-model="voucher"/>

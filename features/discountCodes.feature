@@ -22,17 +22,17 @@ Feature: voucher codes
     Scenario: Invalid voucher - £10 off when spending over £50
         Given that I have items worth £19.00 in my shopping cart
         When I enter the voucher code "save10"
-        Then I should see "Invalid voucher"
+        Then I should see "Total: £19.00"
 
     Scenario: Invalid voucher - £15 off when spending over £75 with footwear - too low
         Given that I have items worth £19.00 in my shopping cart
         And that one of those items is an item of footwear
         When I enter the voucher code "save15"
-        Then I should see "Invalid voucher"
+        Then I should see "Total: £19.00"
 
     Scenario: Invalid voucher - £15 off when spending over £75 with footwear - no footwear
         Given that I have items worth £270.00 in my shopping cart
         But none of those items is an item of footwear
         When I enter the voucher code "save15"
-        Then I should see "Invalid voucher"
+        Then I should see "Total: £270.00"
 
