@@ -54,7 +54,11 @@ angular.module('shopServices').service('vouchers', ['shoppingCart', function() {
       return vouchers;
     },
     discount: function(cart) {
-      return 0;
+      totalDiscount = 0;
+      currentVouchers.forEach(function(currentVoucher) {
+        totalDiscount += currentVoucher.discount;
+        }
+      });
     },
     add: function(voucher) {
       currentVouchers.forEach(function(currentVoucher) {
